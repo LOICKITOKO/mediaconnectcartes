@@ -21,9 +21,10 @@ class Carte(models.Model):
         if not self.expiration_date:
             self.expiration_date = self.issued_at.replace(year=self.issued_at.year + 1)
 
-        # Choisir l'URL de base selon DEBUG
-        base_url = 'http://127.0.0.1:8000' if settings.DEBUG else 'https://mediaconnectcartes.onrender.com'
+        # Générer QR code toujours vers le site public
+        base_url = 'https://mediaconnectcartes.onrender.com'
         qr_url = f"{base_url}/verify/?card={self.card_id}"
+
 
         # Générer l'image QR
         qr_img = qrcode.make(qr_url)
