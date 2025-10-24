@@ -4,9 +4,12 @@ from django.utils.html import format_html
 
 @admin.register(Carte)
 class CarteAdmin(admin.ModelAdmin):
-    list_display = ('card_id', 'name', 'media_name', 'valid', 'issued_at', 'expiration_date', 'qr_preview')
-    search_fields = ('card_id', 'name', 'media_name')
-    list_filter = ('valid',)
+    list_display = ('card_id', 'name', 'media_name', 'role', 'valid', 'issued_at', 'expiration_date', 'qr_preview')
+    search_fields = ('card_id', 'name', 'media_name', 'role')
+    list_filter = ('valid', 'role')
+
+    # On retire issued_at du formulaire car il est automatique
+    fields = ('card_id', 'name', 'media_name', 'role', 'owner_address', 'photo', 'valid')
 
     def qr_preview(self, obj):
         if obj.qr_code:
