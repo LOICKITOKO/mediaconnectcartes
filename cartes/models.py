@@ -34,6 +34,8 @@ class Carte(models.Model):
     media_name = models.CharField(max_length=100, default="Non renseigné")
     role = models.CharField(max_length=50, choices=ROLE_CHOICES, default="Média")
     owner_address = models.CharField(max_length=255, blank=True, null=True)
+    birth_date = models.DateField(blank=True, null=True)
+    birth_place = models.CharField(max_length=255, blank=True, null=True)
     photo = models.ImageField(upload_to='photos/', blank=True, null=True)
     issued_at = models.DateField(default=timezone.now)
     expiration_date = models.DateField(blank=True, null=True)

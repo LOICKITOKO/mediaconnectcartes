@@ -101,11 +101,17 @@
         </p>
 
         <div class="info">
+            {% if card.birth_date or card.birth_place %}
+                <p><strong>Date et lieu de naissance :</strong>
+                    {% if card.birth_date %}{{ card.birth_date|date:"d F Y" }}{% endif %}
+                    {% if card.birth_place %} / {{ card.birth_place }}{% endif %}
+                </p>
+            {% endif %}
             {% if card.owner_address %}
                 <p><strong>Adresse :</strong> {{ card.owner_address }}</p>
             {% endif %}
-            <p><strong>Émise le :</strong> {{ card.issued_at }}</p>
-            <p><strong>Valide jusqu’au :</strong> {{ card.expiration_date }}</p>
+            <p><strong>Émise le :</strong> {{ card.issued_at|date:"d F Y" }}</p>
+            <p><strong>Valide jusqu’au :</strong> {{ card.expiration_date|date:"d F Y" }}</p>
             <p><strong>Statut :</strong>
                 <span class="status">
                     {% if card.valid %}Valide{% else %}Expirée{% endif %}
