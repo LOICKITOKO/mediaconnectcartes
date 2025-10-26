@@ -68,3 +68,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# -----------------------------
+# Code secret pour accéder aux informations personnelles des cartes
+SCAN_SECRET_CODE = "Kano#C0nnect2025!"  # <-- change ce code comme tu veux
