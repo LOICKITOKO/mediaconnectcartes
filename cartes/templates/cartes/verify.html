@@ -73,14 +73,12 @@ p { font-size: 15px; line-height: 1.5; }
         {% endif %}
     </div>
 
-    {% if card.scan_logs.exists %}
+    {% if scans %}
     <div class="history">
         <h3>Historique des scans</h3>
         <ul>
-            {% for log in card.scan_logs.all %}
+            {% for log in scans %}
                 <li>{{ log.date|date:"d/m/Y H:i" }} — Scanné depuis {{ log.device|default:"Inconnu" }}</li>
-            {% empty %}
-                <li>Aucun scan enregistré.</li>
             {% endfor %}
         </ul>
     </div>
