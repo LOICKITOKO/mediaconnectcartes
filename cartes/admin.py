@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Carte, ScanLog
+from .models import Carte, ScanLog, CarteDemande
 
 
 class ScanLogInline(admin.TabularInline):
@@ -39,3 +39,23 @@ class ScanLogAdmin(admin.ModelAdmin):
     list_display = ('carte', 'attempt_type', 'success', 'device', 'ip_address', 'date')
     list_filter = ('attempt_type', 'success', 'date')
     search_fields = ('carte__card_id', 'carte__name', 'device', 'ip_address')
+
+@admin.register(CarteDemande)
+class CarteDemandeAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'doc_type', 'phone', 'email', 'status', 'created_at')
+    list_filter = ('doc_type', 'status', 'created_at')
+    search_fields = ('full_name', 'phone', 'email')
+    readonly_fields = ('created_at',)
+
+    # Actions personnalisées
+    actions = ['mark_as_approved', 'mark_as_rejected']
+
+    def mark_as_approved(self, request, queryset):
+        updated = queryset.update(status='approved')
+        self.message_user(request, f"{updated} demande(s) approuvée(s).")
+    mark_as_approved.short_description = "Marquer comme approuvée"
+
+    def mark_as_rejected(self, request, queryset):
+        updated = queryset.update(status='rejected')
+        self.message_user(request, f"{updated} demande(s) rejetée(s).")
+    mark_as_rejected.short_description = "Marquer comme rejetée"

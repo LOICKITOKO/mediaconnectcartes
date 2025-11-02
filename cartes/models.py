@@ -24,7 +24,7 @@ class Carte(models.Model):
     valid = models.BooleanField(default=True)
     qr_code = models.ImageField(upload_to='qr_codes/', blank=True, null=True)
 
-    # Champs facultatifs pour infos supplémentaires (présents dans verify.html)
+    # Champs facultatifs pour infos supplémentaires
     personal_phone = models.CharField(max_length=20, blank=True, null=True)
     emergency_phone = models.CharField(max_length=20, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
@@ -69,3 +69,55 @@ class ScanLog(models.Model):
     def __str__(self):
         status = "Succès" if self.success else "Échec" if self.success is False else "En attente"
         return f"{self.carte.card_id} - {self.attempt_type} - {status} - {self.date.strftime('%d/%m/%Y %H:%M')}"
+
+
+# ----------------------------- NOUVEAU -----------------------------
+class CarteRequest(models.Model):
+    REQUEST_TYPE_CHOICES = [
+        ('new_card', 'Nouvelle carte'),
+        ('lost_card', 'Déclaration de perte'),
+        ('issue', 'Problème / Signalement'),
+        ('contact', 'Contact'),
+    ]
+
+    request_type = models.CharField(max_length=20, choices=REQUEST_TYPE_CHOICES)
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    message = models.TextField(blank=True, null=True)
+    carte_related = models.ForeignKey(Carte, on_delete=models.SET_NULL, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    processed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.get_request_type_display()} - {self.full_name} ({self.created_at.strftime('%d/%m/%Y %H:%M')})"
+
+class CarteDemande(models.Model):
+    DOCUMENT_TYPES = [
+        ('CNI', 'Carte Nationale'),
+        ('PASS', 'Passeport'),
+        ('ACTE', 'Acte de naissance'),
+    ]
+
+    STATUS_CHOICES = [
+        ('pending', 'En attente'),
+        ('approved', 'Approuvée'),
+        ('rejected', 'Refusée'),
+    ]
+
+    full_name = models.CharField("Nom complet", max_length=150)
+    birth_date = models.DateField("Date de naissance")
+    phone = models.CharField("Téléphone", max_length=20)
+    email = models.EmailField("Email")
+    doc_type = models.CharField("Type de document", max_length=5, choices=DOCUMENT_TYPES)
+    document_file = models.FileField("Document joint", upload_to='demande_documents/')
+    created_at = models.DateTimeField("Date de création", auto_now_add=True)
+    status = models.CharField("Statut", max_length=10, choices=STATUS_CHOICES, default='pending')
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Demande de carte"
+        verbose_name_plural = "Demandes de cartes"
+
+    def __str__(self):
+        return f"{self.full_name} ({self.get_doc_type_display()}) - {self.status}"

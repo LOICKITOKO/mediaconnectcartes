@@ -31,11 +31,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cartes',  # ton app
+    'corsheaders'
 ]
 
 # -----------------------------
 # Middleware
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -45,6 +47,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
 # -----------------------------
 # URLs et WSGI
 ROOT_URLCONF = 'mediaconnectcartes.urls'
@@ -103,4 +108,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # -----------------------------
 # Code secret pour accéder aux infos privées des cartes
-SCAN_SECRET_CODE = env('SCAN_SECRET_CODE', default='Kano#C0nnect2025!')
+SCAN_SECRET_CODE = env('SCAN_SECRET_CODE', default='Kano')
