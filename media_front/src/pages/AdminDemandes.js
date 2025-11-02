@@ -6,30 +6,43 @@ const AdminDemandes = () => {
   const [passwordInput, setPasswordInput] = useState('');
   const [error, setError] = useState('');
   const [demandes, setDemandes] = useState([]);
+  const [pertes, setPertes] = useState([]);
 
-  // Mot de passe simple côté front (à modifier)
+  // Mot de passe simple côté front (à modifier si nécessaire)
   const ADMIN_PASSWORD = 'Kano';
 
   // Fonction de login
   const handleLogin = () => {
     if (passwordInput === ADMIN_PASSWORD) {
       setLoggedIn(true);
-      fetchDemandes();
+      fetchAll();
     } else {
       setError('Mot de passe incorrect');
     }
   };
 
-  // Récupération des demandes depuis Django
-  const fetchDemandes = async () => {
+  // Récupération des demandes et des cartes perdues
+  const fetchAll = async () => {
+    setError('');
     try {
-      const res = await axios.get('http://127.0.0.1:8000/cartes/requests/all/');
-      if (res.data.success) {
-        setDemandes(res.data.demandes);
+      // Demandes de cartes
+      const resDemandes = await axios.get('http://127.0.0.1:8000/cartes/requests/all/');
+      if (resDemandes.data.success && Array.isArray(resDemandes.data.demandes)) {
+        setDemandes(resDemandes.data.demandes);
+      } else {
+        setDemandes([]);
+      }
+
+      // Déclarations de cartes perdues
+      const resPertes = await axios.get('http://127.0.0.1:8000/cartes/request/lost/all/');
+      if (resPertes.data.success && Array.isArray(resPertes.data.lost_cards)) {
+        setPertes(resPertes.data.lost_cards);
+      } else {
+        setPertes([]);
       }
     } catch (err) {
-      console.error("Erreur lors de la récupération des demandes", err);
-      setError('Impossible de récupérer les demandes');
+      console.error("Erreur lors de la récupération des données", err);
+      setError('Impossible de récupérer les données du serveur');
     }
   };
 
@@ -51,10 +64,12 @@ const AdminDemandes = () => {
 
   return (
     <div>
-      <h2>Liste des demandes</h2>
-      <button onClick={fetchDemandes} style={{ marginBottom: '10px' }}>
-        Rafraîchir
-      </button>
+      <h2>Admin Dashboard</h2>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <button onClick={fetchAll} style={{ marginBottom: '20px' }}>Rafraîchir</button>
+
+      {/* Tableau des demandes de cartes */}
+      <h3>Demandes de cartes</h3>
       <table border="1" cellPadding="5">
         <thead>
           <tr>
@@ -68,22 +83,56 @@ const AdminDemandes = () => {
           </tr>
         </thead>
         <tbody>
-          {demandes.length === 0 && (
+          {demandes.length === 0 ? (
             <tr>
               <td colSpan="7">Aucune demande pour le moment</td>
             </tr>
+          ) : (
+            demandes.map(d => (
+              <tr key={d.id}>
+                <td>{d.full_name}</td>
+                <td>{d.birth_date}</td>
+                <td>{d.phone}</td>
+                <td>{d.email}</td>
+                <td>{d.doc_type}</td>
+                <td>{d.status}</td>
+                <td>{d.created_at}</td>
+              </tr>
+            ))
           )}
-          {demandes.map(d => (
-            <tr key={d.id}>
-              <td>{d.full_name}</td>
-              <td>{d.birth_date}</td>
-              <td>{d.phone}</td>
-              <td>{d.email}</td>
-              <td>{d.doc_type}</td>
-              <td>{d.status}</td>
-              <td>{d.created_at}</td>
+        </tbody>
+      </table>
+
+      {/* Tableau des cartes perdues */}
+      <h3 style={{ marginTop: '40px' }}>Déclarations de cartes perdues</h3>
+      <table border="1" cellPadding="5">
+        <thead>
+          <tr>
+            <th>Nom complet</th>
+            <th>Numéro de carte perdue (ID)</th>
+            <th>Téléphone</th>
+            <th>Email</th>
+            <th>Commentaire</th>
+            <th>Date de création</th>
+          </tr>
+        </thead>
+        <tbody>
+          {pertes.length === 0 ? (
+            <tr>
+              <td colSpan="6">Aucune déclaration pour le moment</td>
             </tr>
-          ))}
+          ) : (
+            pertes.map(p => (
+              <tr key={p.id}>
+                <td>{p.full_name}</td>
+                <td>{p.card_id}</td>
+                <td>{p.phone}</td>
+                <td>{p.email}</td>
+                <td>{p.message}</td>
+                <td>{p.created_at}</td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>

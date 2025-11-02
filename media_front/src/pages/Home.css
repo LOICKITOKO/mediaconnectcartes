@@ -1,0 +1,95 @@
+/* Variables de couleur */
+:root {
+  --blue-dark: #1B3B6F;
+  --blue-light: #1E90FF;
+  --white: #F5F7FA;
+  --gray-light: #E5E5E5;
+}
+
+/* Global */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: var(--white);
+  color: var(--blue-dark);
+}
+
+/* Container */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue-light));
+  color: white;
+  padding: 100px 50px;
+  text-align: center;
+  border-radius: 0 0 50px 50px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.hero p {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* Features section */
+.features {
+  flex: 1;
+  padding: 50px;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.features p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.feature-list li {
+  background: var(--blue-light);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: default;
+}
+
+.feature-list li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Footer */
+.home-footer {
+  background: var(--blue-dark);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+}

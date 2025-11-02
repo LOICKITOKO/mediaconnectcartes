@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.core.mail import send_mail
-from .models import Carte, ScanLog, CarteDemande
+from .models import Carte, ScanLog, CarteDemande, CarteRequest
 import json
 from django.views.decorators.http import require_POST
 
@@ -161,3 +161,62 @@ def all_carte_requests(request):
         })
 
     return JsonResponse({"success": True, "demandes": data})
+
+@csrf_exempt
+def declare_lost_card(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+        except:
+            return JsonResponse({"success": False, "error": "Données invalides"})
+
+        full_name = data.get("full_name")
+        card_id_lost = data.get("carte_related")  # correspond au front
+        email = data.get("email")
+        phone = data.get("phone")
+        message = data.get("message")
+
+        if not all([full_name, card_id_lost, email, phone]):
+            return JsonResponse({"success": False, "error": "Tous les champs obligatoires"})
+
+        # Création de la déclaration dans CarteRequest
+        CarteRequest.objects.create(
+            full_name=full_name,
+            email=email,
+            phone=phone,
+            carte_id_lost=card_id_lost,
+            message=message
+        )
+
+        return JsonResponse({"success": True, "message": "✅ Votre déclaration de carte perdue a bien été envoyée !"})
+    return JsonResponse({"success": False, "error": "Méthode non autorisée"})
+
+def all_lost_cards(request):
+    """
+    Retourne toutes les déclarations de cartes perdues.
+    JSON format.
+    """
+    pertes = (
+        CarteRequest.objects
+        .filter(carte_id_lost__isnull=False)
+        .order_by('-created_at')
+    )
+
+    data = [
+        {
+            "id": p.id,
+            "full_name": p.full_name,
+            "card_id": p.carte_id_lost,
+            "phone": p.phone,
+            "email": p.email,
+            "message": p.message,
+            "created_at": p.created_at.strftime("%d/%m/%Y %H:%M"),
+        }
+        for p in pertes
+    ]
+
+    return JsonResponse({
+        "success": True,
+        "count": len(data),
+        "lost_cards": data
+    })

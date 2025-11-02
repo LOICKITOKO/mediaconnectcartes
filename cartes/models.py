@@ -35,7 +35,6 @@ class Carte(models.Model):
     signature_date = models.DateField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        # Expiration automatique à +1 an si non définie
         if not self.expiration_date:
             self.expiration_date = self.issued_at.replace(year=self.issued_at.year + 1)
 
@@ -80,17 +79,17 @@ class CarteRequest(models.Model):
         ('contact', 'Contact'),
     ]
 
-    request_type = models.CharField(max_length=20, choices=REQUEST_TYPE_CHOICES)
     full_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20, blank=True, null=True)
+    carte_id_lost = models.CharField("Numéro de carte perdue (ID)", max_length=50, blank=True, null=True)
     message = models.TextField(blank=True, null=True)
-    carte_related = models.ForeignKey(Carte, on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     processed = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.get_request_type_display()} - {self.full_name} ({self.created_at.strftime('%d/%m/%Y %H:%M')})"
+                return f"{self.full_name} ({self.carte_id_lost}) - {self.created_at.strftime('%d/%m/%Y %H:%M')}"
+
 
 class CarteDemande(models.Model):
     DOCUMENT_TYPES = [

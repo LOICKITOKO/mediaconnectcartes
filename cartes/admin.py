@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Carte, ScanLog, CarteDemande
+from .models import Carte, ScanLog, CarteDemande, CarteRequest
 
 
 class ScanLogInline(admin.TabularInline):
@@ -40,6 +40,7 @@ class ScanLogAdmin(admin.ModelAdmin):
     list_filter = ('attempt_type', 'success', 'date')
     search_fields = ('carte__card_id', 'carte__name', 'device', 'ip_address')
 
+
 @admin.register(CarteDemande)
 class CarteDemandeAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'doc_type', 'phone', 'email', 'status', 'created_at')
@@ -47,7 +48,6 @@ class CarteDemandeAdmin(admin.ModelAdmin):
     search_fields = ('full_name', 'phone', 'email')
     readonly_fields = ('created_at',)
 
-    # Actions personnalisées
     actions = ['mark_as_approved', 'mark_as_rejected']
 
     def mark_as_approved(self, request, queryset):
@@ -59,3 +59,16 @@ class CarteDemandeAdmin(admin.ModelAdmin):
         updated = queryset.update(status='rejected')
         self.message_user(request, f"{updated} demande(s) rejetée(s).")
     mark_as_rejected.short_description = "Marquer comme rejetée"
+
+
+# ---------------- Admin pour CarteRequest (déclaration carte perdue) ----------------
+@admin.register(CarteRequest)
+class CarteRequestAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'carte_id_lost', 'phone', 'email', 'message', 'created_at', 'processed')
+    list_filter = ('processed', 'created_at')
+    search_fields = ('full_name', 'phone', 'email', 'carte_id_lost')
+    readonly_fields = ('created_at',)
+
+    def get_carte_id(self, obj):
+        return obj.carte_related.card_id if obj.carte_related else "-"
+    get_carte_id.short_description = "Numéro de carte perdue (ID)"
