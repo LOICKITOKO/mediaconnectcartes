@@ -7,4 +7,5 @@ urlpatterns = [
 
     # Soumission d'une nouvelle demande de carte / document
     path('request/new/', views.handle_carte_request, name='carte_request'),
+    path('requests/all/', views.all_carte_requests, name='all_carte_requests'),  # <- nouvel endpoint
 ]

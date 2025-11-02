@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const DemandeCarte = () => {
+  const navigate = useNavigate(); // Pour la navigation vers AdminDemandes
+
   const [formData, setFormData] = useState({
     full_name: '',
     birth_date: '',
@@ -65,11 +68,17 @@ const DemandeCarte = () => {
     }
   };
 
+  // Fonction pour naviguer vers l'espace admin front
+  const goToAdmin = () => {
+    navigate('/admin-demandes'); // tu devras créer cette route
+  };
+
   return (
     <div>
       <h1>Demande de carte</h1>
       {message && <p style={{ color: 'green' }}>{message}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
+
       <form onSubmit={handleSubmit}>
         <div>
           <label>Nom complet :</label>
@@ -107,6 +116,16 @@ const DemandeCarte = () => {
 
         <button type="submit">Envoyer la demande</button>
       </form>
+
+      <hr style={{ margin: '20px 0' }} />
+
+      {/* Bouton pour accéder à l'espace admin front */}
+      <button
+        onClick={goToAdmin}
+        style={{ backgroundColor: 'darkblue', color: 'white', padding: '10px 20px', cursor: 'pointer' }}
+      >
+        Espace Admin Front
+      </button>
     </div>
   );
 };

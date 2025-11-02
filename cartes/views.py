@@ -140,3 +140,24 @@ def update_request_status(request, request_id, new_status):
 
     except CarteDemande.DoesNotExist:
         return JsonResponse({"success": False, "error": "Demande introuvable"})
+
+def all_carte_requests(request):
+    """
+    Retourne toutes les demandes de carte en JSON.
+    """
+    demandes = CarteDemande.objects.all().order_by('-created_at')
+    data = []
+
+    for d in demandes:
+        data.append({
+            "id": d.id,
+            "full_name": d.full_name,
+            "birth_date": str(d.birth_date),
+            "phone": d.phone,
+            "email": d.email,
+            "doc_type": d.get_doc_type_display(),
+            "status": d.get_status_display(),
+            "created_at": d.created_at.strftime("%d/%m/%Y %H:%M"),
+        })
+
+    return JsonResponse({"success": True, "demandes": data})

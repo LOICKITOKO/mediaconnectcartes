@@ -6,6 +6,7 @@ import CartePerdue from './pages/CartePerdue';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
 import DemandeCarte from './pages/DemandeCarte';
+import AdminDemandes from './pages/AdminDemandes';
 import VerifierCarte from './pages/VerifierCarte';
 import DisplayCardInfo from './components/DisplayCardInfo'; // note le chemin correct, il est dans components
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/carte-perdue" element={<CartePerdue />} />
             <Route path="/verifier-carte" element={<VerifyCard />} />
             <Route path="/verifier-carte/:cardId" element={<VerifierCarte />} />
+	    <Route path="/admin-demandes" element={<AdminDemandes />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/request-form" element={<RequestForm />} />
           </Routes>
