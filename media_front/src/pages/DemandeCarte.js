@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './DemandeCarte.css';
 
 const DemandeCarte = () => {
-  const navigate = useNavigate(); // Pour la navigation vers AdminDemandes
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     full_name: '',
     birth_date: '',
@@ -31,7 +31,6 @@ const DemandeCarte = () => {
     setMessage('');
     setError('');
 
-    // Vérification rapide côté front
     for (let key in formData) {
       if (!formData[key]) {
         setError('Tous les champs sont obligatoires.');
@@ -68,18 +67,17 @@ const DemandeCarte = () => {
     }
   };
 
-  // Fonction pour naviguer vers l'espace admin front
   const goToAdmin = () => {
-    navigate('/admin-demandes'); // tu devras créer cette route
+    navigate('/admin-demandes');
   };
 
   return (
-    <div>
-      <h1>Demande de carte</h1>
-      {message && <p style={{ color: 'green' }}>{message}</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="demande-carte-container">
+      <form className="demande-carte-form" onSubmit={handleSubmit}>
+        <h1>Demande de carte</h1>
+        {message && <p className="demande-carte-message success">{message}</p>}
+        {error && <p className="demande-carte-message error">{error}</p>}
 
-      <form onSubmit={handleSubmit}>
         <div>
           <label>Nom complet :</label>
           <input type="text" name="full_name" value={formData.full_name} onChange={handleChange} required />
@@ -117,13 +115,31 @@ const DemandeCarte = () => {
         <button type="submit">Envoyer la demande</button>
       </form>
 
-      <hr style={{ margin: '20px 0' }} />
+      <div className="demande-carte-faq">
+        <h2>Pourquoi soumettre une demande de carte ?</h2>
 
-      {/* Bouton pour accéder à l'espace admin front */}
-      <button
-        onClick={goToAdmin}
-        style={{ backgroundColor: 'darkblue', color: 'white', padding: '10px 20px', cursor: 'pointer' }}
-      >
+        <div className="demande-carte-faq-item">
+          <h3>1. Sécurité et traçabilité</h3>
+          <p>Votre demande est enregistrée dans notre système pour garantir un traitement sécurisé et rapide.</p>
+        </div>
+
+        <div className="demande-carte-faq-item">
+          <h3>2. Gain de temps</h3>
+          <p>Le processus est simplifié pour vous permettre d’obtenir votre carte sans déplacements inutiles.</p>
+        </div>
+
+        <div className="demande-carte-faq-item">
+          <h3>3. Suivi personnalisé</h3>
+          <p>Vous pouvez suivre l’état de votre demande et recevoir des notifications sur chaque étape.</p>
+        </div>
+
+        <div className="demande-carte-faq-item">
+          <h3>4. Assistance disponible</h3>
+          <p>Notre équipe reste à votre disposition pour toute question concernant votre demande.</p>
+        </div>
+      </div>
+
+      <button className="demande-carte-admin-btn" onClick={goToAdmin}>
         Espace Admin Front
       </button>
     </div>

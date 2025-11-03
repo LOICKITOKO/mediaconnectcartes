@@ -19,7 +19,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # Clés et debug
 SECRET_KEY = env('SECRET_KEY', default='ta-cle-secrete')
 DEBUG = env('DEBUG', default=True)
-ALLOWED_HOSTS = ['127.0.0.1', '.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com']
 
 # -----------------------------
 # Applications
@@ -30,14 +30,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'cartes',  # ton app
-    'corsheaders'
+    'corsheaders',
 ]
 
 # -----------------------------
 # Middleware
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # doit être en premier
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,9 +48,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+# -----------------------------
+# CORS
+CORS_ALLOW_ALL_ORIGINS = True  # autorise toutes les origines pour dev React local
+
 # -----------------------------
 # URLs et WSGI
 ROOT_URLCONF = 'mediaconnectcartes.urls'

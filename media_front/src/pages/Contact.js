@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './Contact.css';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -50,11 +51,13 @@ const Contact = () => {
   };
 
   return (
-    <div>
-      <h1>Contact</h1>
-      {successMsg && <p style={{ color: 'green' }}>{successMsg}</p>}
-      {errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}
-      <form onSubmit={handleSubmit}>
+    <div className="contact-container">
+      <form className="contact-form" onSubmit={handleSubmit}>
+        <h1>Contact</h1>
+
+        {successMsg && <p className="contact-message success">{successMsg}</p>}
+        {errorMsg && <p className="contact-message error">{errorMsg}</p>}
+
         <div>
           <label>Nom :</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} required />
@@ -77,6 +80,22 @@ const Contact = () => {
 
         <button type="submit">Envoyer</button>
       </form>
+
+      <div className="contact-faq">
+        <h2>Pourquoi nous contacter ?</h2>
+        <div className="contact-faq-item">
+          <h3>Obtenir une réponse rapide</h3>
+          <p>Nous nous engageons à répondre à toutes les demandes sous 24 heures ouvrables.</p>
+        </div>
+        <div className="contact-faq-item">
+          <h3>Support personnalisé</h3>
+          <p>Notre équipe vous aide à résoudre tout problème lié à vos cartes ou services.</p>
+        </div>
+        <div className="contact-faq-item">
+          <h3>Signaler un problème</h3>
+          <p>Vous pouvez signaler toute erreur ou incident pour que nous puissions agir rapidement.</p>
+        </div>
+      </div>
     </div>
   );
 };

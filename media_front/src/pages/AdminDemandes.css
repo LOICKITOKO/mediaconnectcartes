@@ -1,0 +1,116 @@
+/* Container global */
+.admin-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  padding: 30px 20px;
+}
+
+/* Login */
+.admin-login {
+  max-width: 360px;
+  margin: 100px auto;
+  background: #fff;
+  padding: 25px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.admin-login h2 {
+  color: #007BFF;
+  margin-bottom: 20px;
+}
+
+.admin-login input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.admin-login input:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 6px rgba(0,123,255,0.2);
+}
+
+.admin-login button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.admin-login button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Dashboard */
+.admin-dashboard h2 {
+  color: #007BFF;
+  margin-bottom: 20px;
+}
+
+.admin-dashboard button.refresh-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.25s ease;
+}
+
+.admin-dashboard button.refresh-btn:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* Tableaux */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.admin-table th {
+  background-color: #007BFF;
+  color: #fff;
+  font-weight: 600;
+}
+
+.admin-table tr:nth-child(even) {
+  background-color: #f7f9fc;
+}
+
+.admin-table tr:hover {
+  background-color: #e0f0ff;
+}
+
+/* Messages erreur */
+.admin-error {
+  color: #dc3545;
+  font-weight: 600;
+  margin-bottom: 15px;
+}

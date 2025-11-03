@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import './AdminDemandes.css';
 
 const AdminDemandes = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -8,10 +9,8 @@ const AdminDemandes = () => {
   const [demandes, setDemandes] = useState([]);
   const [pertes, setPertes] = useState([]);
 
-  // Mot de passe simple côté front (à modifier si nécessaire)
   const ADMIN_PASSWORD = 'Kano';
 
-  // Fonction de login
   const handleLogin = () => {
     if (passwordInput === ADMIN_PASSWORD) {
       setLoggedIn(true);
@@ -21,11 +20,9 @@ const AdminDemandes = () => {
     }
   };
 
-  // Récupération des demandes et des cartes perdues
   const fetchAll = async () => {
     setError('');
     try {
-      // Demandes de cartes
       const resDemandes = await axios.get('http://127.0.0.1:8000/cartes/requests/all/');
       if (resDemandes.data.success && Array.isArray(resDemandes.data.demandes)) {
         setDemandes(resDemandes.data.demandes);
@@ -33,7 +30,6 @@ const AdminDemandes = () => {
         setDemandes([]);
       }
 
-      // Déclarations de cartes perdues
       const resPertes = await axios.get('http://127.0.0.1:8000/cartes/request/lost/all/');
       if (resPertes.data.success && Array.isArray(resPertes.data.lost_cards)) {
         setPertes(resPertes.data.lost_cards);
@@ -41,16 +37,16 @@ const AdminDemandes = () => {
         setPertes([]);
       }
     } catch (err) {
-      console.error("Erreur lors de la récupération des données", err);
+      console.error(err);
       setError('Impossible de récupérer les données du serveur');
     }
   };
 
   if (!loggedIn) {
     return (
-      <div>
+      <div className="admin-login">
         <h2>Admin Login</h2>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p className="admin-error">{error}</p>}
         <input
           type="password"
           placeholder="Mot de passe admin"
@@ -63,14 +59,13 @@ const AdminDemandes = () => {
   }
 
   return (
-    <div>
+    <div className="admin-container admin-dashboard">
       <h2>Admin Dashboard</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={fetchAll} style={{ marginBottom: '20px' }}>Rafraîchir</button>
+      {error && <p className="admin-error">{error}</p>}
+      <button className="refresh-btn" onClick={fetchAll}>Rafraîchir</button>
 
-      {/* Tableau des demandes de cartes */}
       <h3>Demandes de cartes</h3>
-      <table border="1" cellPadding="5">
+      <table className="admin-table">
         <thead>
           <tr>
             <th>Nom complet</th>
@@ -84,9 +79,7 @@ const AdminDemandes = () => {
         </thead>
         <tbody>
           {demandes.length === 0 ? (
-            <tr>
-              <td colSpan="7">Aucune demande pour le moment</td>
-            </tr>
+            <tr><td colSpan="7">Aucune demande pour le moment</td></tr>
           ) : (
             demandes.map(d => (
               <tr key={d.id}>
@@ -103,9 +96,8 @@ const AdminDemandes = () => {
         </tbody>
       </table>
 
-      {/* Tableau des cartes perdues */}
-      <h3 style={{ marginTop: '40px' }}>Déclarations de cartes perdues</h3>
-      <table border="1" cellPadding="5">
+      <h3>Déclarations de cartes perdues</h3>
+      <table className="admin-table">
         <thead>
           <tr>
             <th>Nom complet</th>
@@ -118,9 +110,7 @@ const AdminDemandes = () => {
         </thead>
         <tbody>
           {pertes.length === 0 ? (
-            <tr>
-              <td colSpan="6">Aucune déclaration pour le moment</td>
-            </tr>
+            <tr><td colSpan="6">Aucune déclaration pour le moment</td></tr>
           ) : (
             pertes.map(p => (
               <tr key={p.id}>

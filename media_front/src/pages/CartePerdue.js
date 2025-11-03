@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './CartePerdue.css';
 
 const CartePerdue = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,6 @@ const CartePerdue = () => {
     setMessage('');
     setError('');
 
-    // Vérification rapide
     for (let key in formData) {
       if (!formData[key]) {
         setError('Tous les champs sont obligatoires.');
@@ -34,7 +34,7 @@ const CartePerdue = () => {
     try {
       const res = await axios.post('http://127.0.0.1:8000/cartes/request/lost/', {
         request_type: 'lost_card',
-	full_name: formData.full_name,
+        full_name: formData.full_name,
         carte_related: formData.card_id,
         phone: formData.phone,
         email: formData.email,
@@ -60,12 +60,12 @@ const CartePerdue = () => {
   };
 
   return (
-    <div>
-      <h1>Déclaration de carte perdue</h1>
-      {message && <p style={{ color: 'green' }}>{message}</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="carte-perdue-container">
+      <form className="carte-perdue-form" onSubmit={handleSubmit}>
+        <h1>Déclaration de carte perdue</h1>
+        {message && <p className="carte-perdue-message success">{message}</p>}
+        {error && <p className="carte-perdue-message error">{error}</p>}
 
-      <form onSubmit={handleSubmit}>
         <div>
           <label>Nom complet :</label>
           <input type="text" name="full_name" value={formData.full_name} onChange={handleChange} required />
@@ -93,6 +93,31 @@ const CartePerdue = () => {
 
         <button type="submit">Envoyer la déclaration</button>
       </form>
+
+      {/* Section explicative / FAQ */}
+      <div className="carte-perdue-faq">
+        <h2>Pourquoi déclarer une perte de carte ?</h2>
+
+        <div className="carte-perdue-faq-item">
+          <h3>1. Sécurité de vos informations</h3>
+          <p>Déclarer rapidement la perte de votre carte permet de sécuriser vos données personnelles et d'éviter toute utilisation frauduleuse.</p>
+        </div>
+
+        <div className="carte-perdue-faq-item">
+          <h3>2. Rapidité de traitement</h3>
+          <p>Votre demande est traitée sous 24 à 48 heures et vous recevez une confirmation par email ou téléphone.</p>
+        </div>
+
+        <div className="carte-perdue-faq-item">
+          <h3>3. Récupération simplifiée</h3>
+          <p>Après traitement, vous pouvez obtenir votre nouvelle carte sans démarches compliquées. Toutes vos informations seront validées rapidement.</p>
+        </div>
+
+        <div className="carte-perdue-faq-item">
+          <h3>4. Assistance personnalisée</h3>
+          <p>Notre équipe reste disponible pour répondre à vos questions et vous guider durant le processus.</p>
+        </div>
+      </div>
     </div>
   );
 };

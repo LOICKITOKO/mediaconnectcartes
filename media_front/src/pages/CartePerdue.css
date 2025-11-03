@@ -1,0 +1,145 @@
+/* Container général */
+.carte-perdue-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0f0ff 0%, #f7f9fc 100%);
+  min-height: 100vh;
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Formulaire */
+.carte-perdue-form {
+  background-color: #fff;
+  padding: 30px 25px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 360px; /* Réduit la largeur des champs */
+  transition: all 0.3s ease;
+}
+
+.carte-perdue-form:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* Titre */
+.carte-perdue-form h1 {
+  text-align: center;
+  color: #007BFF;
+  font-size: 1.8em;
+  margin-bottom: 25px;
+}
+
+/* Champs du formulaire */
+.carte-perdue-form div {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.carte-perdue-form label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+  font-size: 0.92em;
+}
+
+.carte-perdue-form input,
+.carte-perdue-form textarea {
+  padding: 9px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 0.9em;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.carte-perdue-form input:focus,
+.carte-perdue-form textarea:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 8px rgba(0,123,255,0.2);
+}
+
+.carte-perdue-form textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+/* Bouton */
+.carte-perdue-form button {
+  background: #007BFF;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  padding: 10px 0;
+  border-radius: 10px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 0.95em;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+}
+
+.carte-perdue-form button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Messages succès / erreur */
+.carte-perdue-message {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 14px;
+  font-size: 0.92em;
+}
+
+.carte-perdue-message.success {
+  color: #28a745;
+}
+
+.carte-perdue-message.error {
+  color: #dc3545;
+}
+
+/* Section FAQ / avantages */
+.carte-perdue-faq {
+  margin-top: 40px;
+  max-width: 700px;
+}
+
+.carte-perdue-faq h2 {
+  color: #007BFF;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.6em;
+}
+
+.carte-perdue-faq-item {
+  margin-bottom: 18px;
+  border-left: 4px solid #007BFF;
+  background: #f7faff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+.carte-perdue-faq-item:hover {
+  background: #e0f0ff;
+}
+
+.carte-perdue-faq-item h3 {
+  margin: 0 0 8px;
+  font-size: 1em;
+  color: #333;
+  cursor: pointer;
+}
+
+.carte-perdue-faq-item p {
+  margin: 0;
+  color: #555;
+  font-size: 0.92em;
+  line-height: 1.5;
+}

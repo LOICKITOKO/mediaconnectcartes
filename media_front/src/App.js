@@ -7,29 +7,53 @@ import Contact from './pages/Contact';
 import Home from './pages/Home';
 import DemandeCarte from './pages/DemandeCarte';
 import AdminDemandes from './pages/AdminDemandes';
-import VerifierCarte from './pages/VerifierCarte';
-import DisplayCardInfo from './components/DisplayCardInfo'; // note le chemin correct, il est dans components
+import DisplayCardInfo from './components/DisplayCardInfo';
+import "./App.css";
 
 function App() {
   return (
     <Router>
       <div>
-        <nav style={{ padding: '10px', background: '#007BFF', color: 'white' }}>
-          <Link to="/" style={{ margin: '0 10px', color: 'white' }}>Accueil</Link>
-          <Link to="/demande-carte" style={{ margin: '0 10px', color: 'white' }}>Demande Carte</Link>
-          <Link to="/carte-perdue" style={{ margin: '0 10px', color: 'white' }}>Carte Perdue</Link>
-          <Link to="/contact" style={{ margin: '0 10px', color: 'white' }}>Contact</Link>
-          <Link to="/verifier-carte" style={{ margin: '0 10px', color: 'white' }}>Vérifier Carte</Link>
-        </nav>
+        {/* Header global et fixe */}
+        <header
+          className="home-header"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            zIndex: 1000,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <h1 style={{ margin: "0 0 0 20px", color: "#fff" }}>CartesConnect ID</h1>
+          <Link
+            to="/"
+            className="home-header-btn"
+            style={{
+              marginRight: "20px",
+              padding: "20px 70px",
+              backgroundColor: "#007BFF",
+              color: "#fff",
+              borderRadius: "6px",
+              textDecoration: "none",
+              fontWeight: "bold",
+            }}
+          >
+            Accueil
+          </Link>
+        </header>
 
-        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+        {/* Contenu principal avec padding pour ne pas cacher le header */}
+        <div style={{ paddingTop: "80px", maxWidth: "800px", margin: "0 auto" }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/demande-carte" element={<DemandeCarte />} />
             <Route path="/carte-perdue" element={<CartePerdue />} />
             <Route path="/verifier-carte" element={<VerifyCard />} />
-            <Route path="/verifier-carte/:cardId" element={<VerifierCarte />} />
-	    <Route path="/admin-demandes" element={<AdminDemandes />} />
+            <Route path="/admin-demandes" element={<AdminDemandes />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/request-form" element={<RequestForm />} />
           </Routes>
