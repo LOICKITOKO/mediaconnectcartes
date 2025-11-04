@@ -148,3 +148,102 @@
 a {
   text-decoration: none !important;
 }
+
+/* === SECTION FAQ / GUIDES PREMIUM === */
+
+.home-info {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f7f9fc;
+  padding: 50px 40px;
+  max-width: 900px;
+  margin: 60px auto 80px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+}
+
+.home-info h3 {
+  color: black;
+  text-align: left;
+  margin-bottom: 25px;
+  border-bottom: 3px solid #007BFF;
+  padding-bottom: 8px;
+}
+
+.home-info p {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Liste stylée */
+.home-info ol,
+.home-info ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-info ol li,
+.home-info ul li {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  padding: 12px 18px;
+  margin-bottom: 15px;
+  transition: all 0.25s ease, transform 0.25s ease;
+}
+
+.home-info ol li:hover,
+.home-info ul li:hover {
+  transform: translateX(3px) scale(1.01);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+  cursor: pointer;
+}
+
+.home-info ol li strong,
+.home-info ul li strong {
+  color: #007BFF;
+}
+
+.home-info a {
+  color: #007BFF;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.home-info a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Box FAQ / guides interactif */
+.home-info-item {
+  background: #f0f8ff;
+  padding: 20px 25px;
+  border-left: 4px solid #007BFF;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  transition: all 0.25s ease, transform 0.25s ease;
+}
+
+.home-info-item:hover {
+  background: #e0f0ff;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .home-info {
+    padding: 40px 20px;
+  }
+  .home-info h3 {
+    font-size: 1.5em;
+  }
+  .home-info ol li,
+  .home-info ul li {
+    font-size: 0.95em;
+    padding: 10px 15px;
+  }
+}

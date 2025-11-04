@@ -45,7 +45,6 @@ export default function Home() {
         &copy; 2025 CartesConnect ID - Tous droits réservés
       </footer>
 
-
       {/* Cartes pro visuelles (cliquables) */}
       <section className="home-procards">
         
@@ -81,6 +80,43 @@ export default function Home() {
           </div>
         </Link>
 
+      </section>
+
+      {/* Section Explicative et FAQ */}
+      <section className="home-info">
+        <h3>Comment ça fonctionne ?</h3>
+        <p>
+          Chez <strong>CartesConnect ID</strong>, nous facilitons toutes vos démarches liées aux cartes d'identité et aux services associés. Voici comment procéder :
+        </p>
+        <ol>
+          <li><strong>Créez votre compte :</strong> Inscrivez-vous rapidement et sécurisez vos informations.</li>
+          <li><strong>Déposez votre demande :</strong> Choisissez le type de service souhaité (nouvelle carte, carte perdue, vérification).</li>
+          <li><strong>Suivi en ligne :</strong> Consultez l’avancement de votre demande directement depuis votre compte.</li>
+          <li><strong>Recevez vos notifications :</strong> SMS ou email pour vous informer de la disponibilité ou des mises à jour.</li>
+          <li><strong>Récupérez votre carte :</strong> Téléchargez votre version numérique ou retirez-la en mairie selon votre choix.</li>
+        </ol>
+
+        <h3>Foire aux questions (FAQ)</h3>
+        <ul>
+          <li><strong>Comment récupérer ma carte ?</strong> Vous pouvez la télécharger directement depuis votre compte ou la retirer en mairie.</li>
+          <li><strong>Quels sont les délais ?</strong> Généralement entre 2 et 3 semaines selon le type de demande.</li>
+          <li><strong>Que faire en cas de perte ?</strong> Déclarez la perte depuis votre compte et suivez les instructions pour obtenir une nouvelle carte.</li>
+          <li><strong>Puis-je vérifier l’authenticité d’une carte ?</strong> Oui, utilisez notre service de vérification en ligne.</li>
+        </ul>
+
+        <h3>Guides et documents téléchargeables</h3>
+        <ul>
+          <li><a href="/documents/liste_documents.pdf" target="_blank" rel="noopener noreferrer">Liste des documents nécessaires pour chaque type de demande</a></li>
+          <li><a href="/documents/guide_utilisateur.pdf" target="_blank" rel="noopener noreferrer">Guide pratique de l’utilisateur pour la plateforme</a></li>
+          <li><a href="/documents/timbre_fiscal.pdf" target="_blank" rel="noopener noreferrer">Informations sur le timbre fiscal et coûts éventuels</a></li>
+        </ul>
+
+        <h3>Alternatives et conseils</h3>
+        <ul>
+          <li>Si vous êtes pressé, certaines demandes peuvent être traitées en priorité avec justificatif.</li>
+          <li>Pour les jeunes artistes ou utilisateurs, nous proposons des tutoriels vidéo pour bien comprendre le processus.</li>
+          <li>En cas de problème, contactez notre support via le formulaire ou directement par téléphone pour une assistance rapide.</li>
+        </ul>
       </section>
 
     </div>
