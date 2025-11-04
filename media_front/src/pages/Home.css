@@ -83,3 +83,54 @@
   color: #fff;
   margin-top: 40px;
 }
+
+/* === CARTES PRO AJOUTES === */
+
+.home-procards {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  padding: 60px 20px 80px;
+}
+
+.home-cardbox {
+  width: 300px;
+  height: 180px;
+  background: linear-gradient(135deg, #0d6efd, #003c8c);
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+  padding: 20px;
+  color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: .25s;
+  cursor: pointer;
+}
+
+.home-cardbox:hover {
+  transform: rotate(-0.8deg) scale(1.03);
+}
+
+.home-cardbox img {
+  width: 60px;
+  opacity: 0.9;
+}
+
+.home-card-title {
+  font-size: 1.25em;
+  font-weight: bold;
+  letter-spacing: .5px;
+}
+
+.home-card-sub {
+  font-size: .9em;
+  opacity: .85;
+}
+
+/* Enlève soulignement sur tous les liens */
+a {
+  text-decoration: none !important;
+}

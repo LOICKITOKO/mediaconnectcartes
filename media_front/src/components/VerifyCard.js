@@ -144,9 +144,8 @@ function VerifyCard() {
               <strong>Carte d’accréditation virtuelle</strong>
             </p>
             <p style={{ marginTop: 0, color: "#555" }}>
-              Ceci est une carte de vérification virtuelle en relation avec l'État
-              et Cartes Connect ID. Veuillez saisir le code secret pour accéder
-              aux données personnelles.
+              Bienvenue ! Ceci est la carte d'identité virtuelle permettant d'identifier le propriétaire de cette carte.
+	      Toutes les informations personnelles sont protégées et visibles uniquement après saisie du code secret.
             </p>
             <div style={{ marginTop: 12 }}>
               {cardData ? (

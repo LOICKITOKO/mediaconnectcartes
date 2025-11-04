@@ -44,6 +44,45 @@ export default function Home() {
       <footer className="home-footer">
         &copy; 2025 CartesConnect ID - Tous droits réservés
       </footer>
+
+
+      {/* Cartes pro visuelles (cliquables) */}
+      <section className="home-procards">
+        
+        <Link to="/demande-carte" className="home-cardbox">
+          <img src="/img/demandecarte.png" alt="carte" />
+          <div>
+            <div className="home-card-title">Demande de carte</div>
+            <div className="home-card-sub">Nouvelle demande sécurisée</div>
+          </div>
+        </Link>
+
+        <Link to="/carte-perdue" className="home-cardbox">
+          <img src="/img/perdue.png" alt="carte" />
+          <div>
+            <div className="home-card-title">Carte perdue</div>
+            <div className="home-card-sub">Déclaration officielle rapide</div>
+          </div>
+        </Link>
+
+        <Link to="/verifier-carte" className="home-cardbox">
+          <img src="/img/verify.png" alt="carte" />
+          <div>
+            <div className="home-card-title">Vérifier une carte</div>
+            <div className="home-card-sub">Authentification instantanée</div>
+          </div>
+        </Link>
+
+        <Link to="/contact" className="home-cardbox">
+          <img src="/img/support.png" alt="carte" />
+          <div>
+            <div className="home-card-title">Service & Assistance</div>
+            <div className="home-card-sub">Support client dédié</div>
+          </div>
+        </Link>
+
+      </section>
+
     </div>
   );
 }
